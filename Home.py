@@ -13,4 +13,4 @@ from plotly.subplots import make_subplots
 import streamlit as st
 import plotly.io as io
 
-st.title("카카오 뉴스 지수")
+st.title("Kakao Negative Sentiment Index")
