@@ -3,7 +3,7 @@
 """
 Created on Tue Nov 14 15:04:20 2023
 
-@author: woneunglee
+@author: Jinhyung Cho
 """
 
 import streamlit as st
@@ -59,11 +59,11 @@ def bgLevels(fig, df, variable, level, mode, fillcolor, layer):
 
 #%% 제목
 
-st.title("1번 이름")
+st.title("카카오 뉴스 지수")
 
 
 #%% 데이터 불러오고 가공
-news_data = pd.read_csv("카카오+김범수_.csv")
+news_data = pd.read_csv("data.csv")
 news_data = news_data.iloc[:2209] # 8월 4일 시작
 news_data = news_data.iloc[:1975] #9월 1일시작 (가상화폐 소송 시작 정도)
 news_data = news_data.iloc[:1840] #10월 2일시작 차트 깔끔
@@ -114,11 +114,11 @@ with col12:
     option_언론사종류 = st.selectbox(
         "언론사 종류를 선택하세요",
         ['전체', '신문사', '방송사', '통신사', '기타' ],
-        index = 4,
+        index = 0,
     )
 
 with col13:
-    text = st.text_input('검색하고자 하는 단어를 입력하세요', '구속')
+    text = st.text_input('검색 단어를 입력하세요', '')
 
 
 #%% 받아올 정보 2
@@ -157,7 +157,7 @@ with st.spinner("검색 중입니다..."):
     
     fig.add_trace(
         go.Scatter(
-            name="기사 개재 건수",
+            name="기사 게재 건수",
             x = 기사_count_line_plot_df.index,
             y = 기사_count_line_plot_df.media1,
         ),

@@ -13,4 +13,4 @@ from plotly.subplots import make_subplots
 import streamlit as st
 import plotly.io as io
 
-st.title("제목 및 글귀")
+st.title("카카오 뉴스 지수")

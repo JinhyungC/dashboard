@@ -8,4 +8,4 @@ Created on Tue Nov 14 15:06:15 2023
 
  
 import streamlit as st
-st.title("3번")
+st.title("페이지 3 제목 ")
