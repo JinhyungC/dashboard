@@ -64,7 +64,7 @@ st.title("카카오 뉴스 지수")
 
 #%% 데이터 불러오고 가공
 news_data = pd.read_csv("data.csv")
-#news_data = news_data.iloc[:2209] # 8월 4일 시작
+news_data = news_data.iloc[352:] # 8월 4일 시작
 #news_data = news_data.iloc[:1975] #9월 1일시작 (가상화폐 소송 시작 정도)
 #news_data = news_data.iloc[:1840] #10월 2일시작 차트 깔끔
 news_data = news_data.dropna()
