@@ -77,70 +77,68 @@ option_언론사종류 = st.selectbox(
         index = 0,
     )
 
-try:
-    cur_df1 = news_data.loc[news_data["date"].dt.date >= d[0]]
-    chart_date_df = cur_df1.loc[cur_df1["date"].dt.date <= d[1]]
-    if not option_언론사종류 == "전체":
-        chart_date_df = chart_date_df.loc[chart_date_df["종류"] == option_언론사종류]
+
+cur_df1 = news_data.loc[news_data["date"].dt.date >= d[0]]
+chart_date_df = cur_df1.loc[cur_df1["date"].dt.date <= d[1]]
+if not option_언론사종류 == "전체":
+    chart_date_df = chart_date_df.loc[chart_date_df["종류"] == option_언론사종류]
 
 
 
-    chart_df = chart_date_df[[ "media1", '유죄_(등장_횟수)',
-        '불법_(등장_횟수)', '형벌_(등장_횟수)', 
-        '리스크_(등장_횟수)', '구속_(등장_횟수)',
-        '시세조종_(등장_횟수)']].groupby("media1").sum()[['유죄_(등장_횟수)',
-        '불법_(등장_횟수)', '형벌_(등장_횟수)', '리스크_(등장_횟수)', '구속_(등장_횟수)',
-        '시세조종_(등장_횟수)']]
+chart_df = chart_date_df[[ "media1", '유죄_(등장_횟수)',
+       '불법_(등장_횟수)', '형벌_(등장_횟수)', 
+       '리스크_(등장_횟수)', '구속_(등장_횟수)',
+       '시세조종_(등장_횟수)']].groupby("media1").sum()[['유죄_(등장_횟수)',
+       '불법_(등장_횟수)', '형벌_(등장_횟수)', '리스크_(등장_횟수)', '구속_(등장_횟수)',
+       '시세조종_(등장_횟수)']]
 
 
 
-    main_fig = go.Figure(
-        data = [
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['유죄_(등장_횟수)'],
-                name="유죄",
-                ),
+main_fig = go.Figure(
+    data = [
+        go.Bar(
+            x = chart_df.index,
+            y = chart_df['유죄_(등장_횟수)'],
+            name="유죄",
+            ),
 
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['불법_(등장_횟수)'],
-                name="불법",
-                ),
+        go.Bar(
+            x = chart_df.index,
+            y = chart_df['불법_(등장_횟수)'],
+            name="불법",
+            ),
 
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['형벌_(등장_횟수)'],
-                name="형벌",
-                ),
+         go.Bar(
+            x = chart_df.index,
+            y = chart_df['형벌_(등장_횟수)'],
+            name="형벌",
+            ),
 
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['리스크_(등장_횟수)'],
-                name="리스크",
-                ),
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['구속_(등장_횟수)'],
-                name="구속",
-                ),
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['시세조종_(등장_횟수)'],
-                name="시세조종",
-                ),
+         go.Bar(
+            x = chart_df.index,
+            y = chart_df['리스크_(등장_횟수)'],
+            name="리스크",
+            ),
+         go.Bar(
+            x = chart_df.index,
+            y = chart_df['구속_(등장_횟수)'],
+            name="구속",
+            ),
+         go.Bar(
+            x = chart_df.index,
+            y = chart_df['시세조종_(등장_횟수)'],
+            name="시세조종",
+            ),
 
-            go.Bar(
-                x = chart_df.index,
-                y = chart_df['시세조종_(등장_횟수)'] + chart_df['구속_(등장_횟수)'] + chart_df['리스크_(등장_횟수)'] + chart_df['형벌_(등장_횟수)'] +  chart_df['불법_(등장_횟수)'] + chart_df['유죄_(등장_횟수)'],
-                name="합",
-                ),
+        go.Bar(
+            x = chart_df.index,
+            y = chart_df['시세조종_(등장_횟수)'] + chart_df['구속_(등장_횟수)'] + chart_df['리스크_(등장_횟수)'] + chart_df['형벌_(등장_횟수)'] +  chart_df['불법_(등장_횟수)'] + chart_df['유죄_(등장_횟수)'],
+            name="합",
+            ),
 
-            ]
-    )
+        ]
+)
 
 
-    main_fig.update_layout(title='선택 기간 동안의 단어별 등장 횟수', xaxis_title='언론사', yaxis_title='횟수 (건)')
-    st.plotly_chart( main_fig, use_container_width=True) 
-except:
-    st.text("기간 선택 대기중")
+main_fig.update_layout(title='선택 기간 동안의 단어별 등장 횟수', xaxis_title='언론사', yaxis_title='횟수 (건)')
+st.plotly_chart( main_fig, use_container_width=True) 
